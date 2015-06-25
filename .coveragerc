@@ -4,3 +4,6 @@ include =
 omit =
     */test*
     */upgrades/*
+    eggs/*
+    parts/*
+    src-git/*

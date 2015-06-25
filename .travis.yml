@@ -4,11 +4,13 @@ python:
 install:
   - mkdir -p buildout-cache/{eggs,downloads}
   - python bootstrap-buildout.py -c travis.cfg
-  - bin/buildout -Nc travis.cfg
+  - bin/buildout -Nq -t 3 -c travis.cfg
 script:
+  - bin/code-analysis
   - bin/test
-3after_success:
-  - pip install coveralls
+after_success:
+  - bin/createcoverage
+  - pip install -q coveralls
   - coveralls
 
 notifications:
