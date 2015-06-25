@@ -1,0 +1,163 @@
+/*This style changes importan dates format */
+/* <link rel="stylesheet" type="text/css" media="screen" href="http://localhost:8080/nudos/portal_css/Sunburst%20Theme/base.css" /> */
+
+html body {
+    padding-top: 5px;
+    padding-bottom: 20px;
+    font-size: 14px;
+}
+
+#portal-logo {
+  margin: 0;
+}
+
+#portal-globalnav {
+  background-color: brown;
+}
+
+#portal-globalnav li a{
+  background-color: brown;
+  display: block;
+  border-right: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#portal-globalnav a:link, #portal-globalnav a:visited {
+  color: white;
+  font-size: 12px;
+}
+
+#portal-globalnav a:hover{
+  background-color: white;
+  color: brown;
+}
+
+#portal-globalnav .selected a{
+  background-color: #C06A6A;
+}
+
+#edit-bar{
+  font-size: 14px;
+  min-height: 3.4em;
+}
+#edit-bar li {
+  list-style: none;
+}
+
+#edit-bar a, a:link{
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+#edit-bar .contentViews > li,
+#contentActionMenus > li {
+    display: inline-block;
+}
+
+#contentActionMenus > li {
+    float: right;
+    padding-left: 0.8em;
+}
+
+#contentActionMenus dl.actionMenu {
+    margin: 0;
+    padding: 0;
+}
+
+#edit-bar .actionMenuContent ul {
+    margin-left: 0;
+}
+
+#content{
+    line-height: 1.5em;
+    font-size: 100%;
+    padding-right:15px;
+    padding-left:15px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+#pregister dt {
+  background-color: #0c61a4;
+  color: #FFFFFF;
+  padding-left: 10px;
+}
+
+#pacommodation dt {
+  background-color: #cf499c;
+  color: #FFFFFF;
+  padding-left: 10px;
+}
+
+#pabstracts dt {
+  background-color: #98b336;
+  color: #FFFFFF;
+  padding-left: 10px;
+}
+
+#pscientific-program dt {
+  background-color: #4e2396;
+  color: #FFFFFF;
+  padding-left: 10px;
+}
+
+.portletItemDetails{
+  float: right;
+  color: black;
+  display: none;
+}
+
+#important-dates {
+  background-color: white;
+}
+
+#important-dates .portletFooter{
+  font-size:0;
+}
+
+#important-dates .portletItem{
+  padding: 1em;
+}
+
+#important-dates .portletHeader{
+  font-size:2em;
+}
+
+#important-dates .contenttype-event{
+  display: inline;
+  line-height: 1em;
+  padding-left: 0 !important;
+  background: none;
+}
+
+.flexslider {
+  margin-bottom: 0;
+}
+
+.icon-bar {
+  background-color: white;
+}
+
+.speakers td{
+  padding: 10px;
+
+}
+
+.jumbotron p{
+  font-size: 18px;
+}
+/* ====================================================================================================================
+ * RESPONSIVE
+ * ====================================================================================================================*/
+@media screen and (max-width: 1200px) {
+  .jumbotron p{
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .jumbotron p{
+    font-size: 18px;
+  }
+}

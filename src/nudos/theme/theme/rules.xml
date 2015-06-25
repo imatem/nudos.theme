@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <!-- Apply the following rules to standard Plone pages -->
+  <rules css:if-content="#visual-portal-wrapper">
+
+    <theme href="index.html" css:if-content="body.section-front-page"/>
+    <theme href="base.html" />
+
+    <drop css:content="div#viewlet-below-content-title" css:if-content="body.section-front-page"/>
+
+    <!--
+    Note: This rule uses the if-content=".carouselWrapper" directive to ensure
+    that it will only be triggered when there is a carousel present on the page.
+    -->
+    <replace css:theme-children="ul.slides" css:if-content=".carouselWrapper">
+      <xsl:for-each css:select=".tileItem">
+        <li><xsl:copy-of css:select=".itemPadding img"/></li>
+      </xsl:for-each>
+    </replace>
+
+    <!-- Replace title with Plone's page title  -->
+    <replace
+      css:content="html head title"
+      css:theme="html head title"
+      />
+
+    <!-- Copy base tag from Plone -->
+    <before
+      css:content="html head base"
+      css:theme-children="html head"
+      />
+
+    <!-- Copy link, style, meta tags from Plone head -->
+    <before
+      content="/html/head/link | /html/head/meta"
+      css:theme-children="html head"
+      />
+
+    <!-- merge classes from Plone body with theme body -->
+    <merge
+      attributes="class"
+      css:content="body"
+      css:theme="body"
+      />
+
+    <!-- Copy script tags from Plone head to end of body -->
+    <!-- <after
+      css:content="html head script"
+      css:theme-children="html body"
+      /> -->
+
+    <!-- skip portal_javascripts/Sunburst%20Theme/++resource++plone.app.jquery.js -->
+    <after css:theme-children="html body">
+      <xsl:for-each css:select="html head">
+          <xsl:copy-of select="script[position() != 1]"/>
+      </xsl:for-each>
+    </after>
+
+    <!-- LOGO -->
+    <!-- <copy
+      attributes="href"
+      css:content="#portal-logo"
+      css:theme=".navbar-brand"
+      /> -->
+
+    <!-- <copy
+    attributes="class"
+    css:content="#portal-logo"
+    css:theme=".content-header"
+    /> -->
+
+    <!-- <replace
+      css:content-children="#portal-header"
+      css:theme-children="#content-header"
+      /> -->
+
+    <replace
+      css:content="#portal-top"
+      css:theme=".content-header"
+      />
+
+    <!-- PORTAL NAVIGATION -->
+    <!-- <drop css:content="li[id^=portaltab-]" attributes="class id" /> -->
+    <replace
+      css:content-children="#portal-globalnav"
+      css:theme-children="#navbar"
+      />
+
+    <!-- LOGIN (FOR ANONYMOUS USERS) -->
+    <replace
+      if-content="//li[@id='anon-personalbar']"
+      css:content="#personaltools-login"
+      css:theme=".dropdown-toggle"
+      />
+
+    <!-- USER NAME (FOR LOGGED-IN USERS) -->
+    <replace
+      if-content="not(//li[@id='anon-personalbar'])"
+      content="//a[@id='user-name']/text()"
+      css:theme="#user-name"
+      />
+
+    <!-- USER ACTIONS (FOR LOGGED-IN USERS) -->
+    <replace
+      if-content="not(//li[@id='anon-personalbar'])"
+      css:content-children="#portal-personaltools .actionMenuContent ul"
+      css:theme-children="#action-menu-content"
+      />
+
+    <!-- BREADCRUMBS -->
+    <!-- <replace
+      css:content-children="div#portal-breadcrumbs"
+      css:theme-children="ol.breadcrumb"
+      />
+    <drop css:content="span#breadcrumbs-you-are-here" /> -->
+
+    <before css:theme-children="#content" css:content="#edit-bar" />
+
+    <!-- CONTENT -->
+    <replace
+      css:content="#content"
+      css:theme-children="#content"
+      />
+
+    <!-- Portlets -->
+    <!-- <replace
+      css:content=".portlet"
+      css:theme-children="#below-content"
+    /> -->
+
+    <replace
+      css:content-children="dl.portlet-static-register"
+      css:theme-children="#pregister"
+      />
+
+    <replace
+      css:content-children="dl.portlet-static-book-your-acommodation"
+      css:theme-children="#pacommodation"
+      />
+
+    <replace
+      css:content-children="dl.portlet-static-call-for-abstracs"
+      css:theme-children="#pabstracts"
+      />
+
+    <replace
+      css:content-children="dl.portlet-static-scientific-program"
+      css:theme-children="#pscientific-program"
+      />
+
+<!--     <replace
+      css:content-children="dl.portlet-collection-important-dates"
+      css:theme-children="#important-dates"
+      /> -->
+
+    <replace
+      css:content-children="dl.portlet-static-nudos-2017"
+      css:theme-children="#important-dates"
+      />
+
+<!--
+portlet-static-register
+portlet-static-acommodation
+portlet-static-programm
+portlet-static-call-for-abstracs -->
+
+    <!-- FOOTER -->
+    <!-- <replace
+      css:content="#portal-siteactions"
+      css:theme-children="footer"
+      /> -->
+
+  </rules>
+
+  <xsl:template match="//ul[@id='portal-globalnav']//li">
+    <li>
+      <xsl:if test="@id!='portaltab-index_html-level1'">
+        <xsl:attribute name="class">dropdown</xsl:attribute>
+      </xsl:if>
+      <xsl:if test="@class[contains(., 'selected')]">
+        <xsl:attribute name="class">dropdown selected</xsl:attribute>
+      </xsl:if>
+      <a>
+        <xsl:if test="@id!='portaltab-index_html-level1'">
+          <xsl:attribute name="class">dropdown-toggle</xsl:attribute>
+          <xsl:attribute name="data-toggle">dropdown</xsl:attribute>
+          <xsl:attribute name="aria-haspopup">true</xsl:attribute>
+          <xsl:attribute name="role">button</xsl:attribute>
+          <xsl:attribute name="aria-expanded">false</xsl:attribute>
+          <xsl:attribute name="id"><xsl:value-of select="./@id" /></xsl:attribute>
+        </xsl:if>
+        <xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
+        <xsl:value-of select="./a" />
+        <xsl:if test="@id!='portaltab-index_html-level1'">
+          <span class="caret"></span>
+        </xsl:if>
+      </a>
+      <xsl:if test="@id!='portaltab-index_html-level1'">
+        <ul>
+          <xsl:attribute name="class">dropdown-menu</xsl:attribute>
+          <xsl:attribute name="role">menu</xsl:attribute>
+          <xsl:attribute name="aria-labelledby"><xsl:value-of select="./@id" /></xsl:attribute>
+          <xsl:for-each select="ul/li">
+            <li>
+              <xsl:attribute name="role">presentation</xsl:attribute>
+              <a>
+                <xsl:attribute name="role">menuitem</xsl:attribute>
+                <xsl:attribute name="tabindex">-1</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="./a/@href" /></xsl:attribute>
+                <xsl:value-of select="./a" />
+              </a>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </xsl:if>
+    </li>
+  </xsl:template>
+
+</rules>

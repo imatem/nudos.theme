@@ -1,0 +1,6 @@
+[report]
+include =
+    src/nudos/*
+omit =
+    */test*
+    */upgrades/*
