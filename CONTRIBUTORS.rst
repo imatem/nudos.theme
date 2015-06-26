@@ -1,2 +1,2 @@
-- gil-cano, gil@im.unam.mx
-- adriana-rv adriana.rv@im.unam.mx
+- Gildardo Bautista, gil@im.unam.mx
+- Adriana Ramírez Vigueras, adriana.rv@im.unam.mx
