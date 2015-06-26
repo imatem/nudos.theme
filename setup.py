@@ -43,6 +43,7 @@ setup(
     install_requires=[
         'setuptools',
         'z3c.jbot',
+        'plone.api',
         'plone.app.theming',
         'plone.app.themingplugins',
     ],
@@ -50,6 +51,7 @@ setup(
         'test': [
             'plone.app.testing',
             'plone.app.robotframework[debug]',
+            'plone.api',
         ],
     },
     entry_points="""
