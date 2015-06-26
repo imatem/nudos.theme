@@ -132,33 +132,33 @@
       css:theme-children="#below-content"
     /> -->
 
-    <replace
+<!--     <replace
       css:content-children="dl.portlet-static-register"
       css:theme-children="#pregister"
       />
-
-    <replace
+ -->
+<!--     <replace
       css:content-children="dl.portlet-static-book-your-acommodation"
       css:theme-children="#pacommodation"
       />
-
-    <replace
+ -->
+<!--     <replace
       css:content-children="dl.portlet-static-call-for-abstracs"
       css:theme-children="#pabstracts"
       />
-
-    <replace
+ -->
+<!--     <replace
       css:content-children="dl.portlet-static-scientific-program"
       css:theme-children="#pscientific-program"
       />
-
+ -->
 <!--     <replace
       css:content-children="dl.portlet-collection-important-dates"
       css:theme-children="#important-dates"
       /> -->
 
     <replace
-      css:content-children="dl.portlet-static-nudos-2017"
+      css:content-children="dl.portlet-collection-fechas-importantes"
       css:theme-children="#important-dates"
       />
 

@@ -130,6 +130,11 @@ html body {
   line-height: 1em;
   padding-left: 0 !important;
   background: none;
+  color: darkgreen;
+}
+
+#important-dates a, a:link, a:visited{
+  color: darkgreen;
 }
 
 .flexslider {
