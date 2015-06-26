@@ -45,7 +45,6 @@ setup(
         'z3c.jbot',
         'plone.app.theming',
         'plone.app.themingplugins',
-        'quintagroup.dropdownmenu',
     ],
     extras_require={
         'test': [
