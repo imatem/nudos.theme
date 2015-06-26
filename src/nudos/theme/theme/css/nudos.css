@@ -12,11 +12,11 @@ html body {
 }
 
 #portal-globalnav {
-  background-color: brown;
+  background-color: darkgreen;
 }
 
 #portal-globalnav li a{
-  background-color: brown;
+  background-color: darkgreen;
   display: block;
   border-right: 0;
   padding-top: 15px;
@@ -30,11 +30,12 @@ html body {
 
 #portal-globalnav a:hover{
   background-color: white;
-  color: brown;
+  color: darkgreen;
 }
 
 #portal-globalnav .selected a{
-  background-color: #C06A6A;
+  background-color: #77A478;
+  /*#C06A6A;*/
 }
 
 #edit-bar{

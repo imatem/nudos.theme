@@ -176,7 +176,7 @@ portlet-static-call-for-abstracs -->
 
   </rules>
 
-  <xsl:template match="//ul[@id='portal-globalnav']//li">
+  <!-- <xsl:template match="//ul[@id='portal-globalnav']//li">
     <li>
       <xsl:if test="@id!='portaltab-index_html-level1'">
         <xsl:attribute name="class">dropdown</xsl:attribute>
@@ -218,6 +218,6 @@ portlet-static-call-for-abstracs -->
         </ul>
       </xsl:if>
     </li>
-  </xsl:template>
+  </xsl:template> -->
 
 </rules>
