@@ -15,4 +15,6 @@ after_success:
 
 notifications:
   email:
-    - computoacademico@im.unam.mx
+    - gil.cano@gmail.com
+    - adriana.rv@gmail.com
+    - monica.lenero@gmail.com
