@@ -146,6 +146,11 @@ html body {
 
 }
 
+span.email{
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
 .jumbotron p{
   font-size: 18px;
 }
