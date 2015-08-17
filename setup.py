@@ -48,6 +48,12 @@ setup(
         'plone.app.themingplugins',
     ],
     extras_require={
+        'develop': [
+            'plone.app.debugtoolbar',
+            'plone.reload',
+            'Products.PDBDebugMode',
+            'Products.PrintingMailHost',
+        ],
         'test': [
             'plone.app.testing',
             'plone.app.robotframework[debug]',
