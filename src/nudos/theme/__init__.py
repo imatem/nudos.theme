@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """Init and utils."""
 
+from AccessControl import ModuleSecurityInfo
+from AccessControl import allow_type
 from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory('nudos.theme')
 
 
 # Products/PythonScripts/module_access_examples.py
-from AccessControl import allow_type
-from AccessControl import ModuleSecurityInfo
+
 
 ModuleSecurityInfo('re').declarePublic(
     'compile',
