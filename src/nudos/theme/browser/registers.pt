@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="matem.sis">
+  <head>
+
+    <metal:block fill-slot="top_slot"
+              tal:define="dummy python:request.set('disable_border',1);
+                disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                disable_column_two python:request.set('disable_plone.rightcolumn',1);"/>
+
+    <!-- <metal:block fill-slot="style_slot"
+      tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
+      <link href="++resource++wcfc/bootstrap/bootstrap-fixed.css"
+                tal:attributes="href string:${resources_url}/bootstrap/bootstrap-fixed.css"
+                rel="stylesheet" type="text/css"/>
+    </metal:block> -->
+  </head>
+  <body>
+
+    <metal:main fill-slot="main">
+      <metal:content-core define-macro="main">
+        <div  class="jumbotron" style="background-color: #77A478;">
+          <!-- <div  id="content" class="container"> -->
+            <!-- <div class="row"> -->
+
+              <!-- <div class="col-md-12"> -->
+          <!-- kslvjvkjsklvj
+          vs;l;vlsd -->
+            <!-- </div> -->
+          <!-- </div> -->
+        <!-- </div> -->
+        </div>
+
+
+        <h1>Registros</h1>
+        <div   tal:define="registers view/Registers">
+          <table class="listing" tal:define="rrevision registers/revision">
+            <thead>
+              <th>Num.</th>
+              <th>Nombre</th>
+              <th>Apellido Paterno</th>
+              <th>Apellido Materno</th>
+              <th>Dirección de correo electrónico</th>
+              <th>Género</th>
+              <th>Nivel que está cursando</th>
+              <th>Semestre que cursa</th>
+              <th>Institución</th>
+              <th>Profesores que lo recomiendan</th>
+              <th>Interés por participar</th>
+              <th>Fecha de Envío</th>
+            </thead>
+            <tbody>
+              <tr tal:repeat="register rrevision">
+                <td tal:content="repeat/register/number">number</td>
+                <tal:block tal:repeat="k python:register.keys()">
+                  <td tal:content="python:register[k]"/>
+                </tal:block>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+
+        </div>
+      </metal:content-core>
+    </metal:main>
+  </body>
+</html>

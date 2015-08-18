@@ -17,4 +17,12 @@
         directory="static"
         />
 
+    <!-- Registers view administration -->
+    <browser:page
+        name="lregistros"
+        for="*"
+        class=".registers.RegistersView"
+        permission="zope2.View"
+        template="registers.pt"
+        />
 </configure>
