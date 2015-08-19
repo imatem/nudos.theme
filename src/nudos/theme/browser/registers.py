@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from collections import OrderedDict
 from zope.component.hooks import getSite
