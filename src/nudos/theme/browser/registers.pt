@@ -13,9 +13,7 @@
                 disable_column_two python:request.set('disable_plone.rightcolumn',1);"/>
   </head>
   <body>
-
-    <metal:main fill-slot="main">
-      <metal:content-core define-macro="main">
+    <div metal:fill-slot="main">
         <div  tal:define="registers view/Registers">
           <tal:block tal:define="rrevision registers/revision" tal:condition="rrevision">
             <h2> Registros en Revisión</h2>
@@ -120,8 +118,6 @@
             </table>
           </tal:block>
         </div>
-
-      </metal:content-core>
-    </metal:main>
+  </div>
   </body>
 </html>

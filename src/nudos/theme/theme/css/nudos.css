@@ -70,6 +70,7 @@ html body {
     margin-left: 0;
 }
 
+
 #content{
     line-height: 1.5em;
     font-size: 100%;
@@ -154,6 +155,13 @@ span.email{
 .jumbotron p{
   font-size: 18px;
 }
+
+
+.template-lregistros div#content.content.container{
+  margin-left: 0px;
+}
+
+
 /* ====================================================================================================================
  * RESPONSIVE
  * ====================================================================================================================*/
