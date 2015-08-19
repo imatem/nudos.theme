@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.Five import BrowserView
-# from StringIO import StringIO
-# from matem.sis import MessageFactory as _
-# from operator import itemgetter
-# from plone.behavior.interfaces import IBehavior
-# from plone.dexterity.interfaces import IDexterityFTI
-# from zope.component import getMultiAdapter
-# from zope.component import getUtility
 from zope.component.hooks import getSite
 from collections import OrderedDict
-# from zope.i18n import translate
-# from zope.schema.interfaces import IVocabularyFactory
+
+import logging
+
+
+logger = logging.getLogger("Plone")
 
 
 class RegistersView(BrowserView):
@@ -22,6 +18,18 @@ class RegistersView(BrowserView):
         self.context = context
         self.request = request
         # self.form = None
+
+    def __call__(self):
+        form = self.request.form
+        if form:
+            if 'Aceptar' in form.items()[0][1]:
+                self.changeState(form.items()[0][0], 'aceptar')
+            elif 'Rechazar' in form.items()[0][1]:
+                self.changeState(form.items()[0][0], 'rechazar')
+            elif 'Reconsiderar' in form.items()[0][1]:
+                self.changeState(form.items()[0][0], 'revisar')
+            self.request.response.redirect(self.context.absolute_url() + '/lregistros')
+        return self.index()
 
     @property
     def catalog(self):
@@ -50,6 +58,8 @@ class RegistersView(BrowserView):
         for b in brains:
             obj = b.getObject()
             data = OrderedDict()
+            # data['url'] = obj.absolute_url()
+            data['uid'] = obj.UID()
             data['name'] = obj.getValue('nombre')
             data['lastname'] = obj.getValue('apellido-paterno')
             data['middlename'] = obj.getValue('apellido-materno')
@@ -58,7 +68,11 @@ class RegistersView(BrowserView):
             data['level'] = obj.getValue('nivel')
             data['semester'] = obj.getValue('semestre')
             data['institution'] = obj.getValue('institucion')
-            profes = obj.getValue('recomendacion')
+            recomendations = obj.getValue('recomendacion')
+            profes = []
+            for recomendation in recomendations:
+                if not all(map(lambda x: x == '', recomendation.values())):
+                    profes.append(recomendation)
             data['recomendation'] = profes[0]['nombre'] +' (' + profes[0]['institucion'] + ') - ' + profes[0]['correo'] + ', ' + profes[1]['nombre'] +' (' + profes[1]['institucion']+ ') - ' + profes[1]['correo']
             data['comments'] = obj.getValue('comments')
             cdate = obj.created()
@@ -72,12 +86,34 @@ class RegistersView(BrowserView):
         return registers
 
     def Registers(self):
-        registers = {'revision': [], 'accepted': [], 'rejected': []}
+        registers = {'revision': [], 'aceptado': [], 'rechazado': []}
         brains = self.catalog.searchResults(
             portal_type='FormSaveData2ContentEntry',
-            # review_state=''
+            review_state='revision'
         )
-
         registers['revision'] = self.getDataRegisters(brains)
 
+        brains = self.catalog.searchResults(
+            portal_type='FormSaveData2ContentEntry',
+            review_state='aceptado'
+        )
+        registers['aceptado'] = self.getDataRegisters(brains)
+
+        brains = self.catalog.searchResults(
+            portal_type='FormSaveData2ContentEntry',
+            review_state='rechazado'
+        )
+        registers['rechazado'] = self.getDataRegisters(brains)
+
         return registers
+
+    def changeState(self, uid_register, status_register):
+        brains = self.catalog.searchResults(
+            UID=uid_register,
+        )
+        obj = brains[0].getObject()
+        workflowTool = getToolByName(obj, "portal_workflow")
+        try:
+            workflowTool.doActionFor(obj, status_register)
+        except WorkflowException:
+            logger.info("Could not change status:" + str(obj.getId()))
