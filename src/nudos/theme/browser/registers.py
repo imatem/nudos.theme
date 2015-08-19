@@ -3,9 +3,8 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.Five import BrowserView
-from zope.component.hooks import getSite
 from collections import OrderedDict
-
+from zope.component.hooks import getSite
 import logging
 
 
