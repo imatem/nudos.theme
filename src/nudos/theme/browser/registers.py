@@ -72,7 +72,7 @@ class RegistersView(BrowserView):
             for recomendation in recomendations:
                 if not all(map(lambda x: x == '', recomendation.values())):
                     profes.append(recomendation)
-            data['recomendation'] = profes[0]['nombre'] +' (' + profes[0]['institucion'] + ') - ' + profes[0]['correo'] + ', ' + profes[1]['nombre'] +' (' + profes[1]['institucion']+ ') - ' + profes[1]['correo']
+            data['recomendation'] = profes[0]['nombre'] + ' (' + profes[0]['institucion'] + ') - ' + profes[0]['correo'] + ', ' + profes[1]['nombre'] + ' (' + profes[1]['institucion'] + ') - ' + profes[1]['correo']
             data['comments'] = obj.getValue('comments')
             cdate = obj.created()
             data['cdate'] = '%s de %s de %4.4d %s:%2.2d %s' % (
