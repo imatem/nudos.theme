@@ -31,7 +31,7 @@
                 <th>Profesores que lo recomiendan</th>
                 <th>Interés por participar</th>
                 <th>Fecha de Envío</th>
-                <th></th>
+                <th tal:condition="python: checkPermission('Review portal content', context)"></th>
               </thead>
               <tbody>
                 <tr tal:repeat="register rrevision">
@@ -39,7 +39,7 @@
                   <tal:block tal:repeat="k python:register.keys()[1:]">
                     <td tal:content="python:register[k]"/>
                   </tal:block>
-                  <td tal:condition="python: checkPermission('View', context)">
+                  <td tal:condition="python: checkPermission('Review portal content', context)">
                       <div class="btn-group pull-right">
                         <form tal:attributes="action string:${context/absolute_url}/lregistros">
                           <input class="btn btn-success" type="submit" tal:attributes="name python:register['uid']" value="Aceptar">
@@ -98,7 +98,7 @@
                 <th>Profesores que lo recomiendan</th>
                 <th>Interés por participar</th>
                 <th>Fecha de Envío</th>
-                <th></th>
+                <th tal:condition="python: checkPermission('Review portal content', context)"></th>
               </thead>
               <tbody>
                 <tr tal:repeat="register rrechazado">
@@ -106,7 +106,7 @@
                   <tal:block tal:repeat="k python:register.keys()[1:]">
                     <td tal:content="python:register[k]"/>
                   </tal:block>
-                  <td tal:condition="python: checkPermission('View', context)">
+                  <td tal:condition="python: checkPermission('Review portal content', context)">
                       <div class="btn-group pull-right">
                         <form tal:attributes="action string:${context/absolute_url}/lregistros">
                           <input class="btn btn-info" type="submit" tal:attributes="name python:register['uid']" value="Reconsiderar">
