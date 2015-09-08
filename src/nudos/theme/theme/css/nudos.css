@@ -4,7 +4,7 @@
 html body {
     padding-top: 5px;
     padding-bottom: 20px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #portal-logo {
@@ -160,6 +160,7 @@ span.email{
 .template-lregistros div#content.content.container{
   margin-left: 0px;
 }
+
 
 
 /* ====================================================================================================================
