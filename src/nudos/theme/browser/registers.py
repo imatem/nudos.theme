@@ -52,6 +52,73 @@ class RegistersView(BrowserView):
         }
         return _MONTHS.get(fmon, '')
 
+    def getDataRegisters2016(self, brains):
+        registers = []
+        for b in brains:
+            obj = b.getObject()
+            data = OrderedDict()
+            # data['url'] = obj.absolute_url()
+            data['uid'] = obj.UID()
+            data['name'] = obj.getValue('nombre')
+            data['lastname'] = obj.getValue('apellido-paterno')
+            data['middlename'] = obj.getValue('apellido-materno')
+            data['email'] = obj.getValue('replyto')
+            data['gender'] = obj.getValue('genero')
+            data['tiposol'] = obj.getValue('tipo-de-inscripcion')
+            data['institution'] = obj.getValue('institucion')
+            data['comments'] = obj.getValue('comments')
+            data['level'] = obj.getValue('nivel')
+            data['semester'] = obj.getValue('semestre')
+            data['apoyo'] = ', '.join(obj.getValue('solicita-apoyo-para'))
+            recomendations = obj.getValue('recomendacion')
+
+            profes = []
+
+            for recomendation in recomendations:
+                if not all(map(lambda x: x == '', recomendation.values())):
+                    profeval = recomendation['nombre']
+                    if recomendation['institucion']:
+                        profeval += ' (' + recomendation['institucion'] + ')'
+                    if recomendation['correo']:
+                        profeval += ' - ' + recomendation['correo']
+                    profes.append(profeval)
+            data['recomendation'] = ', '.join(profes)
+
+            cdate = obj.created()
+            data['cdate'] = '%s de %s de %4.4d %s:%2.2d %s' % (
+                cdate._day, self.monthTranslation(cdate._fmon),
+                cdate._year, cdate._pmhour,
+                cdate._minute, cdate._pm)
+
+            registers.append(data)
+
+        return registers
+
+    def Registers2016(self):
+        registers = {'revision': [], 'aceptado': [], 'rechazado': []}
+        brains = self.catalog.searchResults(
+            portal_type='FormSaveData2ContentEntry',
+            review_state='revision',
+            path='/escuelanudos2015/registro-2016',
+        )
+        registers['revision'] = self.getDataRegisters2016(brains)
+
+        brains = self.catalog.searchResults(
+            portal_type='FormSaveData2ContentEntry',
+            review_state='aceptado',
+            path='/escuelanudos2015/registro-2016',
+        )
+        registers['aceptado'] = self.getDataRegisters2016(brains)
+
+        brains = self.catalog.searchResults(
+            portal_type='FormSaveData2ContentEntry',
+            review_state='rechazado',
+            path='/escuelanudos2015/registro-2016',
+        )
+        registers['rechazado'] = self.getDataRegisters2016(brains)
+
+        return registers
+
     def getDataRegisters(self, brains):
         registers = []
         for b in brains:
@@ -68,6 +135,7 @@ class RegistersView(BrowserView):
             data['semester'] = obj.getValue('semestre')
             data['institution'] = obj.getValue('institucion')
             recomendations = obj.getValue('recomendacion')
+
             profes = []
             for recomendation in recomendations:
                 if not all(map(lambda x: x == '', recomendation.values())):

@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="matem.sis">
+  <head>
+
+    <metal:block fill-slot="top_slot"
+              tal:define="dummy python:request.set('disable_border',1);
+                disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                disable_column_two python:request.set('disable_plone.rightcolumn',1);"/>
+  </head>
+  <body>
+    <div metal:fill-slot="main">
+        <div  tal:define="registers view/Registers2016">
+          <tal:block tal:define="rrevision registers/revision" tal:condition="rrevision">
+            <h2> Registros en Revisión</h2>
+            <table class="listing" >
+              <thead>
+                <th>Num.</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Dirección de correo electrónico</th>
+                <th>Género</th>
+                <th>Tipo de Inscripción</th>
+                <th>Institución</th>
+                <th>Interés por participar</th>
+                <th>Nivel que está cursando</th>
+                <th>Semestre que cursa</th>
+                <th>Solicita Appoyo para:</th>
+                <th>Profesores que lo recomiendan</th>
+                <th>Fecha de Envío</th>
+                <th tal:condition="python: checkPermission('Review portal content', context)"></th>
+              </thead>
+              <tbody>
+                <tr tal:repeat="register rrevision">
+                  <td tal:content="repeat/register/number">number</td>
+                  <tal:block tal:repeat="k python:register.keys()[1:]">
+                    <td tal:content="python:register[k]"/>
+                  </tal:block>
+                  <td tal:condition="python: checkPermission('Review portal content', context)">
+                      <div class="btn-group pull-right">
+                        <form tal:attributes="action string:${context/absolute_url}/lregistros2016">
+                          <input class="btn btn-success" type="submit" tal:attributes="name python:register['uid']" value="Aceptar">
+                            <br/><br/>
+                          <input class="btn btn-danger" type="submit" tal:attributes="name python:register['uid']" value="Rechazar">
+                        </form>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </tal:block>
+
+          <tal:block tal:define="raceptado registers/aceptado" tal:condition="raceptado">
+            <h2> Registros Aceptados</h2>
+            <table class="listing" >
+              <thead>
+                <th>Num.</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Dirección de correo electrónico</th>
+                <th>Género</th>
+                <th>Tipo de Inscripción</th>
+                <th>Institución</th>
+                <th>Interés por participar</th>
+                <th>Nivel que está cursando</th>
+                <th>Semestre que cursa</th>
+                <th>Solicita Appoyo para:</th>
+                <th>Profesores que lo recomiendan</th>
+                <th>Fecha de Envío</th>
+              </thead>
+              <tbody>
+                <tr tal:repeat="register raceptado">
+                  <td tal:content="repeat/register/number">number</td>
+                  <tal:block tal:repeat="k python:register.keys()[1:]">
+                    <td tal:content="python:register[k]"/>
+                  </tal:block>
+                </tr>
+              </tbody>
+            </table>
+          </tal:block>
+
+
+          <tal:block tal:define="rrechazado registers/rechazado" tal:condition="rrechazado">
+            <h2> Registros Rechazados</h2>
+            <table class="listing" >
+              <thead>
+                <th>Num.</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Dirección de correo electrónico</th>
+                <th>Género</th>
+                <th>Tipo de Inscripción</th>
+                <th>Institución</th>
+                <th>Interés por participar</th>
+                <th>Nivel que está cursando</th>
+                <th>Semestre que cursa</th>
+                <th>Solicita Appoyo para:</th>
+                <th>Profesores que lo recomiendan</th>
+                <th>Fecha de Envío</th>
+                <th tal:condition="python: checkPermission('Review portal content', context)"></th>
+              </thead>
+              <tbody>
+                <tr tal:repeat="register rrechazado">
+                  <td tal:content="repeat/register/number">number</td>
+                  <tal:block tal:repeat="k python:register.keys()[1:]">
+                    <td tal:content="python:register[k]"/>
+                  </tal:block>
+                  <td tal:condition="python: checkPermission('Review portal content', context)">
+                      <div class="btn-group pull-right">
+                        <form tal:attributes="action string:${context/absolute_url}/lregistros2016">
+                          <input class="btn btn-info" type="submit" tal:attributes="name python:register['uid']" value="Reconsiderar">
+                        </form>
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </tal:block>
+        </div>
+  </div>
+  </body>
+</html>

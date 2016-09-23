@@ -25,4 +25,11 @@
         permission="zope2.View"
         template="registers.pt"
         />
+    <browser:page
+        name="lregistros2016"
+        for="*"
+        class=".registers.RegistersView"
+        permission="zope2.View"
+        template="registers2016.pt"
+        />
 </configure>
