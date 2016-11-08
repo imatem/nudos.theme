@@ -27,7 +27,7 @@ class RegistersView(BrowserView):
                 self.changeState(form.items()[0][0], 'rechazar')
             elif 'Reconsiderar' in form.items()[0][1]:
                 self.changeState(form.items()[0][0], 'revisar')
-            self.request.response.redirect(self.context.absolute_url() + '/lregistros')
+            self.request.response.redirect(self.context.absolute_url() + '/lregistros2016')
         return self.index()
 
     @property
